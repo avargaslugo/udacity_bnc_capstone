@@ -79,11 +79,11 @@ contract Pausable is Ownable{
     bool private _paused = false;
 
     modifier paused(){
-        require(_paused, "Contract is not paused")
+        require(_paused, "Contract is not paused");
         _;
     }
     modifier whenNotPaused(){
-        require(!_paused, "Contract is paused")
+        require(!_paused, "Contract is paused");
         _;
     }
 
@@ -94,10 +94,10 @@ contract Pausable is Ownable{
         require(pause != _paused, "Trying to set the pause state to its current state");
         _paused = pause;
         if(pause){
-            emit Pause(msg.sender);
+            emit Paused(msg.sender);
         }
         else{
-            emit Unpause(msg.sender);
+            emit Unpaused(msg.sender);
         }
     }
 
@@ -105,7 +105,7 @@ contract Pausable is Ownable{
 }
 
 
-contract ERC165 is Ownable {
+contract ERC165 {
     bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
     /*
      * 0x01ffc9a7 ===
@@ -148,7 +148,7 @@ contract ERC721 is Pausable, ERC165 {
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
 
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
-    
+
     using SafeMath for uint256;
     using Address for address;
     using Counters for Counters.Counter;
@@ -180,7 +180,7 @@ contract ERC721 is Pausable, ERC165 {
     }
 
     function balanceOf(address owner) public view returns (uint256) {
-        return _ownedTokensCount[owner].current;
+        return _ownedTokensCount[owner].current();
     }
 
     function ownerOf(uint256 tokenId) public view returns (address) {
@@ -189,12 +189,12 @@ contract ERC721 is Pausable, ERC165 {
 
 //    @dev Approves another address to transfer the given token ID
     function approve(address to, uint256 tokenId) public {
-        
+
         // TODO require the given address to not be the owner of the tokenId
         require(ownerOf(tokenId)!=to, "owner and to address are the same");
 
         // TODO require the msg sender to be the owner of the contract or isApprovedForAll() to be true
-        require((msg.sender == _owner) || isApprovedForAll(msg.sender, to) );
+        require((msg.sender == ownerOf(tokenId)) || isApprovedForAll(msg.sender, to) );
 
         // TODO add 'to' address to token approvals
         _tokenApprovals[tokenId] = to;
@@ -274,9 +274,10 @@ contract ERC721 is Pausable, ERC165 {
         // TODO revert if given tokenId already exists or given address is invalid
         require(!_exists(tokenId), "token already exists");
         require(to != address(0), 'invalid address');
-  
+
         // TODO mint tokenId to given address & increase token count of owner
-        _ownedTokensCount[tokenId].increment();
+        _tokenOwner[tokenId] = to;
+        _ownedTokensCount[to].increment();
 
         // TODO emit Transfer event
         emit Transfer(msg.sender, to, tokenId);
@@ -291,7 +292,7 @@ contract ERC721 is Pausable, ERC165 {
 
         // TODO: require token is being transfered to valid address
         require(to != address(0), 'your are transfering to an invalid address');
-        
+
         // TODO: clear approval
 
         // TODO: update token counts & transfer ownership of the token ID
@@ -507,7 +508,7 @@ contract ERC721Enumerable is ERC165, ERC721 {
 }
 
 contract ERC721Metadata is ERC721Enumerable, usingOraclize {
-    
+
     // TODO: Create private vars for token _name, _symbol, and _baseTokenURI (string)
 
     string private _name;
@@ -545,16 +546,38 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
         require(_exists(tokenId));
         return _symbol;
     }
-    function tokenURI(uint256 tokenId) external view returns (string memory) {
+    function baseTokenURI(uint256 tokenId) external view returns (string memory) {
         require(_exists(tokenId));
         return _baseTokenURI;
     }
     function tokenURI(uint256 tokenId) external view returns (string memory) {
         require(_exists(tokenId));
-        return _tokenURIs;
+        return _tokenURIs[tokenId];
     }
 
-
+    function uintToBytes(uint v) public pure returns (bytes32 ret) {
+        if (v == 0) {
+            ret = '0';
+        }
+        else {
+            while (v > 0) {
+                ret = bytes32(uint(ret) / (2 ** 8));
+                ret |= bytes32(((v % 10) + 48) * 2 ** (8 * 31));
+                v /= 10;
+            }
+        }
+        return ret;
+    }
+    function bytes32ToString (bytes32 data) public pure returns (string memory) {
+        bytes memory bytesString = new bytes(32);
+        for (uint j=0; j<32; j++) {
+            byte char = byte(bytes32(uint(data) * 2 ** (8 * j)));
+            if (char != 0) {
+                bytesString[j] = char;
+            }
+        }
+        return string(bytesString);
+    }
     // TODO: Create an internal function to set the tokenURI of a specified tokenId
     // It should be the _baseTokenURI + the tokenId in string form
     // TIP #1: use strConcat() from the imported oraclizeAPI lib to set the complete token URI
@@ -563,7 +586,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     // require the token exists before setting
     function setTokenURI(uint256 tokenId) internal{
         require(_exists(tokenId), "token does not exist");
-        _tokenURIs[tokenId] = strConcat(_baseTokenURI, bytes32ToString(uintToBytes(tokenId)));
+        _tokenURIs[tokenId] = strConcat(_baseTokenURI, uint2str(tokenId));
     }
 
 }
@@ -577,13 +600,10 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //      -returns a true boolean upon completion of the function
 //      -calls the superclass mint and setTokenURI functions
 
+
 contract CustomERC721Token is ERC721Metadata{
 
-    constructor(string memory name, string memory symbol){
-        _name = name;
-        _symbol = symbol;
-        _baseTokenURI = "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/";
-    }
+    constructor(string memory name, string memory symbol) ERC721Metadata(name, symbol, "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") public {}
 
     function mint(address to, uint tokenId) public onlyOwner returns (bool)
     {
@@ -592,5 +612,6 @@ contract CustomERC721Token is ERC721Metadata{
         return true;
     }
 }
+
 
 
