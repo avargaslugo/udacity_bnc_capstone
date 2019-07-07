@@ -1,4 +1,4 @@
-var ERC721MintableComplete = artifacts.require('ERC721MintableComplete');
+var ERC721MintableComplete = artifacts.require('CustomERC721Token');
 
 contract('TestERC721Mintable', accounts => {
 
@@ -7,18 +7,22 @@ contract('TestERC721Mintable', accounts => {
 
     describe('match erc721 spec', function () {
         beforeEach(async function () { 
-            this.contract = await ERC721MintableComplete.new({from: account_one});
+            this.contract = await ERC721MintableComplete.new("test", "tst", {from: account_one});
 
             // TODO: mint multiple tokens
-        })
+            for(let i = 0; i < 5; i ++){
+                await this.contract.mint(TEST.tokenRecipients[i], i + 1, {from: account_one});
+            }
+        });
 
         it('should return total supply', async function () { 
-            
-        })
+            let total = await this.contract.totalSupply.call();
+            assert.equal(total.toNumber(), 4, "result not correct");
+        });
 
         it('should get token balance', async function () { 
             
-        })
+        });
 
         // token uri should be complete i.e: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1
         it('should return token uri', async function () { 
