@@ -6,13 +6,14 @@ contract('TestERC721Mintable', accounts => {
     const account_two = accounts[1];
 
     describe('match erc721 spec', function () {
-        beforeEach(async function () { 
+        beforeEach(async function () {
+            // deploy token with `test` as name and `tst` as symbol
             this.contract = await ERC721MintableComplete.new("test", "tst", {from: account_one});
 
             // TODO: mint multiple tokens
-            for(let i = 0; i < 5; i ++){
-                await this.contract.mint(TEST.tokenRecipients[i], i + 1, {from: account_one});
-            }
+            await this.contract.mint(account_two, 1, {from: account_one});
+            await this.contract.mint(account_two, 2, {from: account_one});
+            await this.contract.mint(account_two, 3, {from: account_one});
         });
 
         it('should return total supply', async function () { 
