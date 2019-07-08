@@ -562,32 +562,9 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     internal
     {
         require(_exists(tokenId) == true, "Token does not exist");
-        _tokenURIs[tokenId] = strConcat(_baseTokenURI, bytes32ToString(uintToBytes(tokenId)));
+        _tokenURIs[tokenId] = strConcat(_baseTokenURI, uint2str(tokenId));
     }
 
-    function uintToBytes(uint v) public pure returns (bytes32 ret) {
-        if (v == 0) {
-            ret = '0';
-        }
-        else {
-            while (v > 0) {
-                ret = bytes32(uint(ret) / (2 ** 8));
-                ret |= bytes32(((v % 10) + 48) * 2 ** (8 * 31));
-                v /= 10;
-            }
-        }
-        return ret;
-    }
-    function bytes32ToString (bytes32 data) public pure returns (string memory) {
-        bytes memory bytesString = new bytes(32);
-        for (uint j=0; j<32; j++) {
-            byte char = byte(bytes32(uint(data) * 2 ** (8 * j)));
-            if (char != 0) {
-                bytesString[j] = char;
-            }
-        }
-        return string(bytesString);
-    }
 }
 
 //  TODO's: Create CustomERC721Token contract that inherits from the ERC721Metadata contract. You can name this contract as you please
@@ -599,8 +576,8 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //      -returns a true boolean upon completion of the function
 //      -calls the superclass mint and setTokenURI functions
 
-contract CustomERC721Token is ERC721Metadata {
-    constructor(string memory name, string memory symbol) ERC721Metadata(name, symbol, "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") public {}
+contract CustomERC721Token is ERC721Metadata("test", "tst", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
+    constructor() public {}
 
     function mint(address to, uint tokenId) public onlyOwner
     returns (bool)
