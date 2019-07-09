@@ -1377,12 +1377,12 @@
     "1562496162561": {
       "events": {},
       "links": {},
-      "address": "0x7A62ADccaAcfC5f7842f49fCb8342e999E955A28",
-      "transactionHash": "0xc3958f9867de0c3384ac819c6f9754ee0ceac8da4a792ac38ba7bfbf32be993c"
+      "address": "0x06f293A873d886a5a3EEDF2969ea7D6f0a768F19",
+      "transactionHash": "0x637d5e0fb83ffdee76f9eddb6f2f2020ba39a288254ac25952dd4a6411240fc6"
     }
   },
   "schemaVersion": "3.0.9",
-  "updatedAt": "2019-07-08T17:07:36.458Z",
+  "updatedAt": "2019-07-09T08:55:04.879Z",
   "devdoc": {
     "methods": {}
   },
