@@ -71,4 +71,4 @@ contract('TestERC721Mintable', accounts => {
         })
 
     });
-})
+});
