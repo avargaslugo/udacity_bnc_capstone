@@ -23,7 +23,8 @@ it('verification with correct proof',async function(){
 
 // Test verification with incorrect proof
 it('verification with incorrect proof',async function(){
-    correctproof.input=[10,1];
+    //change proof input to wrong value
+    correctproof.input=[1,12];
     let verified = await this.contract.verifyTx.call(correctproof.proof.A,correctproof.proof.A_p,correctproof.proof.B,correctproof.proof.B_p,correctproof.proof.C,correctproof.proof.C_p,correctproof.proof.H,correctproof.proof.K,correctproof.input,{from:account_one});
     assert.equal(verified,false,"verification is valid");
 })
