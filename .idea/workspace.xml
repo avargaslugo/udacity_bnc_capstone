@@ -3,33 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7f6de04b-06a5-4df6-bfe7-f7595c20f7dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/Address.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/Address.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/BN256G2.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/BN256G2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/Buffer.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/Buffer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/CBOR.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/CBOR.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/Counters.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/Counters.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/CustomERC721Token.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/CustomERC721Token.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/ERC165.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/ERC165.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/ERC721.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/ERC721.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/ERC721Enumerable.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/ERC721Enumerable.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/ERC721Metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/ERC721Metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/IERC721Receiver.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/IERC721Receiver.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/Migrations.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/Migrations.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/OraclizeAddrResolverI.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/OraclizeAddrResolverI.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/OraclizeI.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/OraclizeI.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/Ownable.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/Ownable.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/Pairing.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/Pairing.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/Pausable.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/Pausable.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/SafeMath.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/SafeMath.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/SolnSquareVerifier.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/SolnSquareVerifier.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/Verifier.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/Verifier.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/solcChecker.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/solcChecker.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/build/contracts/usingOraclize.json" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/build/contracts/usingOraclize.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/migrations/2_deploy_contracts.js" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/migrations/2_deploy_contracts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eth-contracts/truffle-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/eth-contracts/truffle-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -262,16 +235,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1562183415142</updated>
-      <workItem from="1562183423060" duration="43715000" />
+      <workItem from="1562183423060" duration="44007000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43715000" />
+    <option name="totallyTimeSpent" value="44007000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.185836" />

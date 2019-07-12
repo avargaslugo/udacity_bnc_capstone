@@ -19,11 +19,11 @@
  */
 
 const HDWalletProvider = require('truffle-hdwallet-provider');
-const infuraKey = 'https://rinkeby.infura.io/v3/99f3e50cbba24d479fe91187714000f0';
+const infuraKey = '';
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
-const mnemonic = 'parent leopard equip settle gadget used acquire absorb reject unaware force annual';
+const mnemonic = '';
 
 module.exports = {
   /**
