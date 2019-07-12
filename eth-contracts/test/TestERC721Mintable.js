@@ -6,56 +6,59 @@ contract('TestERC721Mintable', accounts => {
     const account_two = accounts[1];
     const account_three = accounts[2];
 
-    describe('match erc721 spec', function () {
+    describe('Token contract can be instantiated, mint tokens and main functionality is in place', function () {
         beforeEach(async function () {
-            // deploy token with `test` as name and `tst` as symbol
+            // deploy new contract
             this.contract = await ERC721MintableComplete.new({from: account_one});
-
-            // TODO: mint multiple tokens
+            // mint 4 tokens using the contract. 3 tokens are given to `account_one` while 1 is given to `account_two`
             await this.contract.mint(account_one, 1, {from: account_one});
             await this.contract.mint(account_one, 2, {from: account_one});
             await this.contract.mint(account_one, 3, {from: account_one});
             await this.contract.mint(account_two, 4, {from: account_one});
         });
 
-        it('should return total supply', async function () { 
+        it('Returns the total supply of tokens', async function () {
             let total = await this.contract.totalSupply.call();
-            assert.equal(total, 4, "result not correct");
+            assert.equal(total, 4, "Total supply is not what was expected");
         });
 
-        it('should get token balance', async function () {
+        it('Returns token balance for specific account', async function () {
+            // get balance for `account_one`
             let balance1 = await this.contract.balanceOf(account_one);
+            // get balance for `account_two`
             let balance2 = await this.contract.balanceOf(account_two);
+            // check that balances are what was expected.
             assert.equal(balance1, 3, "the balance was not what was expected");
             assert.equal(balance2, 1, "the balance was not what was expected");
-
         });
 
-        // token uri should be complete i.e: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1
-        it('should return token uri', async function () { 
+        it('Returns toke uris', async function () {
+            // fetches tokenUris for tokens 1 and 2
            let uri1 = await this.contract.tokenURI.call(1);
            let uri2 = await this.contract.tokenURI.call(2);
-           assert.equal(uri1,"https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1", 'the token uri was' +
-               ' not what was expected');
-           assert.equal(uri2,"https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/2", 'the token uri was' +
-               ' not what was expected');
-
+           let baseUri = "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/";
+           assert.equal(uri1,baseUri + "1", 'unexpected token uri');
+           assert.equal(uri2,baseUri + "2", 'unexpected token uri');
         });
 
-        it('should transfer token from one owner to another', async function () {
+        it('Transfers tokens from one account to an other one', async function () {
+            // transfers token 1 from `account_one` to `account_three`
             await this.contract.transferFrom(account_one, account_three, 1);
+            // fetches owner of token 1
             let owner = await this.contract.ownerOf(1);
-            assert.equal(owner, account_three, "token was not transfered");
+            // asserts the owner for token 1 is `account_three`
+            assert.equal(owner, account_three, "token transfer failed");
         })
     });
 
-    describe('have ownership properties', function () {
-        beforeEach(async function () { 
+    describe('Main contract ownership properties work correctly', function () {
+        beforeEach(async function () {
+            // contract owner is `account_one`
             this.contract = await ERC721MintableComplete.new({from: account_one});
         });
 
-        it('should fail when minting when address is not contract owner', async function () {
-            let success = true
+        it('Fails to mint tokens using a non-contract owner account', async function () {
+            let success = true;
             try{
              await this.contract.mint(account_three, 1, {from: account_three});
             }
@@ -65,9 +68,9 @@ contract('TestERC721Mintable', accounts => {
             assert.equal(success, false, "non-contract owner was able to mint");
         });
 
-        it('should return contract owner', async function () { 
+        it('Returns contract owner', async function () {
             let owner =  await this.contract.getOwner();
-            assert.equal(owner, account_one, "owner of contract is not the expected one")
+            assert.equal(owner, account_one, "returned wrong contract owner")
         })
 
     });
