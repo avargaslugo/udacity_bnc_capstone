@@ -35,17 +35,21 @@ parameter for the `SolnSquareVerifier` contract. The tests show that:
 - It is not possible to mint new tokens using proofs already used.
 
 
-# Contract Addresses
-These are the addresses of the contracts deployed in the Rinkeby network
+# Contract Addresses and ABI
+These are the addresses of the contracts deployed in the Rinkeby network and the locations where their respective 
+ABIs can found.
 
 ## SolnSquareVerifier
-0x977995388547FEA6668aB6B3Fd1B491ac0F4aceB
+Rinkeby address: 0x977995388547FEA6668aB6B3Fd1B491ac0F4aceB
+ABI: `Blockchain-Capstone/eth-contracts/build/contracts/SolnSquareVerifier.json`
 
 ## Verifier
-0xd6e671EB5D3587Bcc671A6649c5e4d2C0dC5009b
+Rinkeby address: 0xd6e671EB5D3587Bcc671A6649c5e4d2C0dC5009b
+ABI: `Blockchain-Capstone/eth-contracts/build/contracts/Verifier.json`
 
 ## CustomERC721Token
-0x90d8c69E124B50cE5730fDB387435DFb20c117A1
+Rinkeby address: 0x90d8c69E124B50cE5730fDB387435DFb20c117A1
+ABI: `Blockchain-Capstone/eth-contracts/build/contracts/CustomERC721Token.json`
 
 # OpenSea
 
